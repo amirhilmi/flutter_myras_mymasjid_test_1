@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 //import 'package:crud/PageForm2.dart';
 //import 'package:crud/PageList.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: <String, WidgetBuilder>{
+      '/': (context) => MyApp(),
+      '/second': (context) => SecondHome(),
+    },
+  ));
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,7 +20,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'MediaQuery Demo',
       theme: new ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
       ),
       home: new MyHomePage(),
     );
@@ -108,8 +116,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil("/complaintList",
-                  (route) => true,);// Function is executed on tap.
+                  
+                  Navigator.push(context, new MaterialPageRoute(
+                   builder: (context) =>
+                  new SecondHome())
+                );
+                  
+                  // Navigator.of(context).pushNamedAndRemoveUntil("/second",
+                  // (route) => true,);// Function is executed on tap.
                 },
 
                 child: new Column(
@@ -218,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: new Card(
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil("/complaint",
+                        Navigator.of(context).pushNamedAndRemoveUntil("/second",
                               (route) => true,);// Function is executed on tap.
                       },
 
@@ -258,7 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
 
                               Text(
-                                'ADD COMPLAINT',
+                                'CONTENTS',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -282,4 +296,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+
+
+
+
+class SecondHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second Home'),
+      ),
+      body: new Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go Back'),
+        ),
+      ),
+    );
+  }
+}
 
